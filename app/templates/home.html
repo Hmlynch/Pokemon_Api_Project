@@ -1,0 +1,23 @@
+{% extends './layout.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<h1>Home</h1>
+{% if user.is_authenticated  %}
+<p>Welcome to our app {{ user.trainer_name }}</p>
+{% else %}
+<p>Please<a href="{{ url_for('auth.login') }}">Login</a></p>
+{% endif %}
+
+{% for pokemon in pokemons %}
+<ul class="list-group">
+    <li class="list-group-item"><h5>Pokemon Name: {{ pokemon['pokemon_name'] }}</h5></li>
+    <li class="list-group-item"><p>Type: {{ pokemon['type'] }}</p></li>
+    <li class="list-group-item"><p>Abilities: {{ pokemon['abilities'] }}</p></li>
+    <li class="list-group-item"><p>Classification: {{ pokemon['classification'] }}</p></li>
+</ul>
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends './layout.html' %}
+
+{% block title %}Posts{% endblock title %}
+
+{% block content %}
+<h1>Posts</h1>
+
+<form action="{{ url_for('user.create_post') }}" method="POST">
+    <div class="mb-3">
+        <label for="inputPokemonBuddy" class="form-label">Pokemon Buddy</label>
+        <input type="text" class="form-control" id="inputPokemonBuddy" name="inputPokemonBuddy">
+    </div>
+    <div class="mb-3">
+        <label for="inputTeamName" class="form-label">Body</label>
+        <input type="text" class="form-control" id="inputTeamName" name="inputTeamName">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% for post in posts %}
+<div class="card">
+    <div class="'card-body">
+        <h5 class="pokemon-title"><a href="{{ url_for('user.post_by_id', id=post.id)}}">{{ post.pokemon }}</a></h5>
+        {{ post.why }}
+    </div>
+    <div class="card-footer">
+        This post brought to you by: {{ post.user.trainer_name }} 
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}
